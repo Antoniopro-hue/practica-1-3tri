@@ -9,6 +9,7 @@ input.onSound(DetectedSound.Loud, function () {
         basic.pause(100)
         pins.digitalWritePin(DigitalPin.P0, 0)
     }
+    ruido = 1
 })
 let ruido = 0
 ruido = 0
@@ -21,5 +22,20 @@ basic.showLeds(`
     . # . . .
     `)
 basic.forever(function () {
-	
+    while (input.temperature() == 27) {
+        for (let index = 0; index < 5; index++) {
+            basic.showLeds(`
+                . . # # #
+                # . # . .
+                . . # . .
+                . . # . .
+                . . # # #
+                `)
+            basic.pause(100)
+            basic.showArrow(ArrowNames.South)
+        }
+    }
+    basic.clearScreen()
+    pins.analogWritePin(AnalogPin.P10, 27)
+    basic.pause(100)
 })
